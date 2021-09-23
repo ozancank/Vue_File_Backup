@@ -1,3 +1,5 @@
+const FileModel = require('./FileModel');
+
 exports.get_all = (req, res) => {
     res.send('files');
 };
