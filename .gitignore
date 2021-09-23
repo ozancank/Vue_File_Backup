@@ -142,6 +142,8 @@ dist
 
 # TODO: where does this rule come from?
 docs/_book
+.lock
+*-lock.json
 
 # TODO: where does this rule come from?
 test/
