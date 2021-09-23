@@ -145,7 +145,5 @@ docs/_book
 yarn.lock
 *-lock.json
 
-# TODO: where does this rule come from?
 test/
-
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vue,node
+server/uploads/files/*.jpg
