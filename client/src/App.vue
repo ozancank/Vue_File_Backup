@@ -1,18 +1,15 @@
+<script type="text/javascript">
+import Header from './components/Header.vue';
+
+export default {
+    components: { Header }
+};
+</script>
+
 <template>
     <div>
-        <header>
-            <nav>
-                <h1>My Files</h1>
-            </nav>
-        </header>
-        <section class="files">
-          <div class="file">1</div>
-          <div class="file">2</div>
-          <div class="file">3</div>
-          <div class="file">4</div>
-          <div class="file">5</div>
-          <div class="file">6</div>
-        </section>
+        <Header />
+        <router-view />
     </div>
 </template>
 

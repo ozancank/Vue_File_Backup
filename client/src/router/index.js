@@ -4,5 +4,17 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export default new Router({
-    routes: []
+    routes: [
+        {
+            path: '/',
+            component: () => import('@/components/Files'),
+            name: 'files'
+        },
+        {
+            path: '/add',
+            component: () => import('@/components/Add'),
+            name: 'add'
+        }
+    ],
+    mode: 'history'
 });
