@@ -8,6 +8,11 @@ export default {
 
 <template>
     <div>
+        <notifications
+            group="when-added"
+            position="bottom right"
+            closeOnClick="true"
+        />
         <Header />
         <router-view />
     </div>
