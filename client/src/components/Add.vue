@@ -62,9 +62,12 @@ export default {
             />
             <button>Add File</button>
         </form>
-        <div class="floating-action-button">
-            <i class="fa fa-arrow-left fa-2x"></i>
-        </div>
+
+        <router-link :to="{ name: 'files' }" custom v-slot="{ navigate }">
+            <div class="floating-action-button" @click="navigate">
+                <i class="fa fa-arrow-left fa-2x"></i>
+            </div>
+        </router-link>
     </div>
 </template>
 

@@ -14,11 +14,23 @@ input {
     border-bottom: 5px solid var(--border-color);
 }
 
-button{
+button {
     width: 50%;
 }
 
-.vue-dropzone{
+.vue-dropzone {
     width: 50%;
-    
+}
+
+.floating-action-button {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    border-radius: 2rem;
+    background-color: var(--border-color);
+    width: 60px;
+    height: 50px;
+    text-align: center;
+    padding-top: 1rem;
+    color: white;
 }

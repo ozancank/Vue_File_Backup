@@ -11,7 +11,7 @@ export default {
         <notifications
             group="when-added"
             position="bottom right"
-            closeOnClick="true"
+            closeOnClick
         />
         <Header />
         <router-view />
