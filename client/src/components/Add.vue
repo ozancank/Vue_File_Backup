@@ -12,39 +12,39 @@ export default {
                 thumbnailWidth: 150,
                 maxFilesize: 0.5,
                 autoProcessQueue: false,
-                addRemoveLinks: true
-            }
+                addRemoveLinks: true,
+            },
         };
     },
     methods: {
         onSubmit() {
             this.$refs.dropzone.dropzone.options.headers = {
-                title: this.title
+                title: this.title,
             };
             this.$refs.dropzone.processQueue();
         },
         whenAddedFile() {
             this.$notify({
                 group: 'when-added',
-                title: 'Your file added'
+                title: 'Your file added',
             });
         },
         whenRemovedFile() {
             this.$notify({
                 group: 'when-added',
-                title: 'Your file removed'
+                title: 'Your file removed',
             });
         },
         success() {
             this.$notify({
                 group: 'when-added',
-                title: 'Your files uploaded successfully'
+                title: 'Your files uploaded successfully',
             });
-        }
+        },
     },
     components: {
-        vueDropzone: vue2Dropzone
-    }
+        vueDropzone: vue2Dropzone,
+    },
 };
 </script>
 
@@ -60,7 +60,9 @@ export default {
                 ref="dropzone"
                 :options="dropzoneOptions"
             />
-            <button>Add File</button>
+            <button :disabled="!title || title === '' ? true : false">
+                Add File
+            </button>
         </form>
 
         <router-link :to="{ name: 'files' }" custom v-slot="{ navigate }">

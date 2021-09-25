@@ -1,4 +1,6 @@
 const FileModel = require('./FileModel');
+const fs = require('fs');
+const { BASE_URL } = require('../../config');
 
 exports.get_all = (req, res) => {
     FileModel.find()
@@ -19,7 +21,9 @@ exports.get_all = (req, res) => {
 exports.upload = (req, res) => {
     const title = req.headers.title;
     const fileUrl = `/uploads/files/${req.file.filename}`;
-    const fileType = req.file.originalname.split('.')[1];
+    const fileType = req.file.originalname.split('.').pop();
+
+    if (!title || title === '') return;
 
     const newFile = new FileModel({
         title,
@@ -55,5 +59,19 @@ exports.file_count = (req, res) => {
     ];
     FileModel.aggregate(agg).then((response) => {
         res.status(200).json(response);
+    });
+};
+
+exports.delete_file = (req, res) => {
+    const path = BASE_URL + req.headers.path;
+    const id = req.headers.id;
+    fs.unlink(path, (err) => {
+        if (err) console.log(err);
+        FileModel.deleteOne({ _id: id }).then((response) => {
+            res.status(200).json({
+                message: 'Your file removed successfully',
+                subtitle: `Deleted from ${path}`,
+            });
+        });
     });
 };

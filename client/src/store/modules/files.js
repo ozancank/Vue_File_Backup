@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Vue from 'vue';
 const { FILE_API } = require('../http-config');
 
 const state = {
@@ -15,6 +16,10 @@ const mutations = {
     },
     setFileCounts(state, payload) {
         state.fileCounts = payload;
+    },
+    removeFile(state, payload) {
+        const file = state.files.find(file => file._id == payload);
+        state.files.splice(file, 1);
     }
 };
 const actions = {
@@ -27,6 +32,20 @@ const actions = {
         axios.get(FILE_API + '/file-count').then(response => {
             vuexContext.commit('setFileCounts', response.data);
         });
+    },
+    deleteFile(vuexContext, payload) {
+        axios
+            .delete(FILE_API + '/delete', {
+                headers: { id: payload.id, path: payload.path }
+            })
+            .then(response => {
+                vuexContext.commit('removeFile', payload.id);
+                Vue.notify({
+                    group: 'when-deleted',
+                    title: response.data.message,
+                    text: response.data.subtitle
+                });
+            });
     }
 };
 

@@ -2,7 +2,7 @@
 export default {
     computed: {
         fileCounts() {
-            return this.$store.getters['Files/filesCounts'];
+            return this.$store.getters['Files/fileCounts'];
         }
     }
 };
@@ -11,10 +11,13 @@ export default {
 <template>
     <div>
         <div class="cards">
-            {{fileCounts}}
-            <div class="card">
-                Dosya Türü
-                <b>10</b>
+            <div
+                class="card"
+                v-for="count in fileCounts"
+                v-bind:key="count._id"
+            >
+                {{ count._id }}
+                <b>{{ count.total }}</b>
             </div>
         </div>
     </div>

@@ -1,11 +1,11 @@
-<script type="text/javascript">
+<script>
 import FileCounts from './FileCount';
 import ConfirmDelete from './dialogs/ConfirmDelete';
 
 export default {
     components: {
         FileCounts,
-        ConfirmDelete
+        ConfirmDelete,
     },
     created() {
         this.$store.dispatch('Files/getFiles');
@@ -14,13 +14,13 @@ export default {
     computed: {
         files() {
             return this.$store.getters['Files/files'];
-        }
+        },
     },
     methods: {
         redirect(url) {
             window.open('http://localhost:3000' + url, '_blank');
-        }
-    }
+        },
+    },
 };
 </script>
 
@@ -33,11 +33,15 @@ export default {
         </div>
         <FileCounts />
         <section class="files">
-            <div class="file">
-                <p><b>File Name:</b>&nbsp;</p>
-                <p><b>File Type:</b>&nbsp;</p>
-                <Button>Detail</Button>
-                <ConfirmDelete />
+            <div class="file" v-for="file in files" v-bind:key="file._id">
+                <p><b>File Name:</b>&nbsp;{{ file.title }}</p>
+                <p><b>File Type:</b>&nbsp;{{ file.fileType }}</p>
+                <Button @click="redirect(file.fileUrl)">Detail</Button>
+                <ConfirmDelete
+                    :id="file._id"
+                    :title="file.title"
+                    :path="file.fileUrl"
+                />
             </div>
         </section>
     </div>

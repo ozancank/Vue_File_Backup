@@ -2,17 +2,14 @@
 import Header from './components/Header.vue';
 
 export default {
-    components: { Header }
+    components: { Header },
 };
 </script>
 
 <template>
     <div>
-        <notifications
-            group="when-added"
-            position="bottom right"
-            closeOnClick
-        />
+        <notifications group="when-added" position="bottom right" />
+        <notifications group="when-deleted" position="bottom right" />
         <Header />
         <router-view />
     </div>
