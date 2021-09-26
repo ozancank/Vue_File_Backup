@@ -2,7 +2,16 @@ const fs = require('fs');
 const { UPLOAD_URL } = require('../../config');
 
 exports.folders = (req, res) => {
-    res.send('folder');
+    let folders = [];
+    fs.readdir(UPLOAD_URL, (err, items) => {
+        items.forEach((item) => {
+            let stat = fs.lstatSync(`${UPLOAD_URL}/${item}`).isDirectory();
+            if (stat) {
+                folders.push(item);
+            }
+        });
+        res.send(folders);
+    });
 };
 
 exports.create_folder = (req, res) => {
@@ -11,6 +20,7 @@ exports.create_folder = (req, res) => {
         res.status(201).json({
             message: 'This folder already exists',
             folderName,
+            path:`${UPLOAD_URL}${folderName}`
         });
     } else {
         fs.mkdirSync(`${UPLOAD_URL}${folderName}`);

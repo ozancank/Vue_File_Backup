@@ -2,11 +2,15 @@
 import vue2Dropzone from 'vue2-dropzone';
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
 import { FILE_API } from '../store/http-config';
+import { folderMixin } from '../mixins/folderMixin';
 
 export default {
+    mixins: [folderMixin],
     data() {
         return {
+            addedFile: false,
             title: '',
+            folderName: 'Ana Dizin',
             dropzoneOptions: {
                 url: FILE_API + '/upload',
                 thumbnailWidth: 150,
@@ -20,6 +24,7 @@ export default {
         onSubmit() {
             this.$refs.dropzone.dropzone.options.headers = {
                 title: this.title,
+                folderName: this.folderName,
             };
             this.$refs.dropzone.processQueue();
         },
@@ -52,6 +57,12 @@ export default {
     <div>
         <form @submit="onSubmit()">
             <input type="text" placeholder="Enter Title" v-model="title" />
+            <select v-model="folderName">
+                <option selected>Ana Dizin</option>
+                <option v-for="folder in folders" v-bind:key="folder">
+                    {{ folder }}
+                </option>
+            </select>
             <vueDropzone
                 @vdropzone-file-added="whenAddedFile()"
                 @vdropzone-success="success()"

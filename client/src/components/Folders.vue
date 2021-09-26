@@ -1,0 +1,69 @@
+<script>
+export default {
+    props: {
+        folders: {
+            required: true,
+        },
+    },
+    data() {
+        return {
+            folderName: '',
+            validationError: false,
+            showTooltip: false,
+        };
+    },
+    methods: {
+        createFolder() {
+            if (this.folderName.length > 0) {
+                this.$store.dispatch('Folders/createFolder', this.folderName);
+                this.folderName = '';
+            } else {
+                this.validationError = true;
+                setTimeout(() => {
+                    this.validationError = false;
+                }, 3000);
+            }
+        },
+    },
+    watch: {
+        showTooltip(val) {
+            if (val === true) {
+                setTimeout(() => {
+                    this.showTooltip = false;
+                }, 2000);
+            }
+        },
+    },
+};
+</script>
+
+<template>
+    <div class="folders">
+        <h2>Your Folders</h2>
+        <div class="folder-list">
+            <ul v-for="folder in folders" v-bind:key="folder">
+                <router-link
+                    :to="{ name: 'folder', params: { folderName: folder } }"
+                    custom v-slot="{ navigate }"
+                >
+                    <li @click="navigate">{{ folder }}</li>
+                </router-link>
+            </ul>
+        </div>
+        <div class="add-new-folder">
+            <div class="tooltip" v-if="showTooltip">
+                Press enter for create folder.
+            </div>
+            <div class="error" v-if="validationError">
+                Please fill the foldername area.
+            </div>
+            <input
+                v-model="folderName"
+                type="text"
+                placeholder="Create New Folder"
+                @mouseover="showTooltip = true"
+                @keypress.enter="createFolder()"
+            />
+        </div>
+    </div>
+</template>

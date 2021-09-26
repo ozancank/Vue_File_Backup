@@ -5,14 +5,17 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './uploads/files');
+        const folderName = req.headers.foldername;
+        const uploadPath =
+            folderName === 'Ana Dizin'
+                ? './uploads/files'
+                : `./uploads/files/${folderName}`;
+
+        cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
         const filename = file.originalname.split('.')[0];
-        cb(
-            null,
-            `${filename}_${Date.now()}${path.extname(file.originalname)}`
-        );
+        cb(null, `${filename}_${Date.now()}${path.extname(file.originalname)}`);
     },
 });
 
@@ -20,6 +23,8 @@ const upload = multer({ storage });
 
 router.get('/', FileController.get_all);
 router.get('/file-count', FileController.file_count);
+router.get('/:folderName', FileController.get);
+
 router.post('/upload', upload.single('file'), FileController.upload);
 router.delete('/delete', FileController.delete_file);
 

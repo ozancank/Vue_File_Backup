@@ -1,23 +1,21 @@
 <script>
 import FileCounts from './FileCount';
 import ConfirmDelete from './dialogs/ConfirmDelete';
+import Folders from './Folders';
+import { folderMixin } from '../mixins/folderMixin';
 
 export default {
+    mixins: [folderMixin],
     components: {
         FileCounts,
         ConfirmDelete,
+        Folders,
     },
     created() {
         this.$store.dispatch('Files/getFiles');
         this.$store.dispatch('Files/getFileCounts');
     },
-    data() {
-        return {
-            folderName: '',
-            validationError: false,
-            showTooltip: false,
-        };
-    },
+
     computed: {
         files() {
             return this.$store.getters['Files/files'];
@@ -26,25 +24,6 @@ export default {
     methods: {
         redirect(url) {
             window.open('http://localhost:3000' + url, '_blank');
-        },
-        createFolder() {
-            if (this.folderName.length > 0) {
-                this.$store.dispatch('Folders/createFolder', this.folderName);
-            } else {
-                this.validationError = true;
-                setTimeout(() => {
-                    this.validationError = false;
-                }, 3000);
-            }
-        },
-    },
-    watch: {
-        showTooltip(val) {
-            if (val === true) {
-                setTimeout(() => {
-                    this.showTooltip = false;
-                }, 2000);
-            }
         },
     },
 };
@@ -59,30 +38,7 @@ export default {
         </div>
         <FileCounts />
         <section class="main">
-            <div class="folders">
-                <h2>Your Folders</h2>
-                <hr />
-                <ul>
-                    <li>Folder Name</li>
-                    <li>Folder Name</li>
-                    <li>Folder Name</li>
-                </ul>
-                <div class="add-new-folder">
-                    <div class="tooltip" v-if="showTooltip">
-                        Press enter for create folder.
-                    </div>
-                    <div class="error" v-if="validationError">
-                        Please fill the foldername area.
-                    </div>
-                    <input
-                        v-model="folderName"
-                        type="text"
-                        placeholder="Create New Folder"
-                        @mouseover="showTooltip = true"
-                        @keypress.enter="createFolder()"
-                    />
-                </div>
-            </div>
+            <Folders :folders="folders" />
             <div class="files" v-if="files.length > 0">
                 <div class="file" v-for="file in files" v-bind:key="file._id">
                     <p><b>File Name:</b>&nbsp;{{ file.title }}</p>

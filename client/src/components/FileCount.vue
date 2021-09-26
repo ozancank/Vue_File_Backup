@@ -34,7 +34,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     width: 20%;
     min-height: 10vh;
     padding: 0.5rem;

@@ -14,6 +14,11 @@ export default new Router({
             path: '/add',
             component: () => import('@/components/Add'),
             name: 'add'
+        },
+        {
+            path: '/folder/:folderName',
+            component: () => import('@/components/Folder'),
+            name: 'folder'
         }
     ],
     mode: 'history'

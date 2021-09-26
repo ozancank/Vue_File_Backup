@@ -19,6 +19,10 @@ const fileSchema = mongoose.Schema({
         type: String,
         lowerCase: true,
     },
+    folderName: {
+        required: true,
+        type: String,
+    },
 });
 
 module.exports = mongoose.model('files', fileSchema);

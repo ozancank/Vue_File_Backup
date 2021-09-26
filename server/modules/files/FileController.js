@@ -2,8 +2,8 @@ const FileModel = require('./FileModel');
 const fs = require('fs');
 const { BASE_URL } = require('../../config');
 
-exports.get_all = (req, res) => {
-    FileModel.find()
+const get_folder = (res, folderName) => {
+    FileModel.find({ folderName })
         .then((files) => {
             res.status(200).json({
                 files,
@@ -18,9 +18,22 @@ exports.get_all = (req, res) => {
         });
 };
 
+exports.get_all = (req, res) => {
+    get_folder(res, 'Ana Dizin');
+};
+
+exports.get = (req, res) => {
+    const folderName = req.params.folderName;
+    get_folder(res, folderName);
+};
+
 exports.upload = (req, res) => {
     const title = req.headers.title;
-    const fileUrl = `/uploads/files/${req.file.filename}`;
+    const folderName = req.headers.foldername;
+    const fileUrl =
+        folderName === 'Ana Dizin'
+            ? `/uploads/files/${req.file.filename}`
+            : `/uploads/files/${folderName}/${req.file.filename}`;
     const fileType = req.file.originalname.split('.').pop();
 
     if (!title || title === '') return;
@@ -29,6 +42,7 @@ exports.upload = (req, res) => {
         title,
         fileUrl,
         fileType,
+        folderName,
     });
     newFile
         .save()

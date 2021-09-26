@@ -7,7 +7,8 @@ form {
     align-items: center;
 }
 
-input {
+input,
+select {
     padding: 0.5rem;
     width: 50%;
     border: none;
