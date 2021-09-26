@@ -1,0 +1,21 @@
+.isMobile {
+    display: none;
+}
+@media screen and (max-width: 900px) {
+    .isMobile {
+        display: inline-block;
+        margin-top: 5px;
+    }
+    .folders {
+        display: none;
+    }
+    .card span {
+        font-size: 15px;
+    }
+    .card {
+        width: 40% !important;
+    }
+    button {
+        width: 50% !important;
+    }
+}

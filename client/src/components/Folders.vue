@@ -1,39 +1,12 @@
 <script>
+import { folderMixin } from '../mixins/folderMixin';
 export default {
-    props: {
-        folders: {
-            required: true,
-        },
-    },
-    data() {
-        return {
-            folderName: '',
-            validationError: false,
-            showTooltip: false,
-        };
-    },
-    methods: {
-        createFolder() {
-            if (this.folderName.length > 0) {
-                this.$store.dispatch('Folders/createFolder', this.folderName);
-                this.folderName = '';
-            } else {
-                this.validationError = true;
-                setTimeout(() => {
-                    this.validationError = false;
-                }, 3000);
-            }
-        },
-    },
-    watch: {
-        showTooltip(val) {
-            if (val === true) {
-                setTimeout(() => {
-                    this.showTooltip = false;
-                }, 2000);
-            }
-        },
-    },
+    mixins: [folderMixin],
+    // props: {
+    //     folders: {
+    //         required: true,
+    //     },
+    // },
 };
 </script>
 
@@ -44,7 +17,8 @@ export default {
             <ul v-for="folder in folders" v-bind:key="folder">
                 <router-link
                     :to="{ name: 'folder', params: { folderName: folder } }"
-                    custom v-slot="{ navigate }"
+                    custom
+                    v-slot="{ navigate }"
                 >
                     <li @click="navigate">{{ folder }}</li>
                 </router-link>
@@ -67,3 +41,5 @@ export default {
         </div>
     </div>
 </template>
+
+<style src="../../static/mobile.css"></style>

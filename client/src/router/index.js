@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { checkMobile } from './utils';
 
 Vue.use(Router);
 
@@ -14,6 +15,12 @@ export default new Router({
             path: '/add',
             component: () => import('@/components/Add'),
             name: 'add'
+        },
+        {
+            path: '/folders',
+            component: () => import('@/components/mobile/Folders'),
+            name: 'folders',
+            beforeEnter: checkMobile
         },
         {
             path: '/folder/:folderName',

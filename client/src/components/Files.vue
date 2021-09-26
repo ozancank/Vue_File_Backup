@@ -25,6 +25,14 @@ export default {
             <router-link :to="{ name: 'add' }" custom v-slot="{ navigate }">
                 <button @click="navigate">Add New File</button>
             </router-link>
+            <router-link
+                :to="{ name: 'folders' }"
+                custom
+                v-slot="{ navigate }"
+                class="isMobile"
+            >
+                <button @click="navigate">Add New Folder</button>
+            </router-link>
         </div>
         <FileCounts />
         <section class="main">
@@ -54,3 +62,4 @@ export default {
 
 <style src="../../static/files.css" ></style>
 <style src="../../static/folders.css"></style>
+<style src="../../static/mobile.css"></style>

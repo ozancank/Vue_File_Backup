@@ -3,8 +3,8 @@ const fs = require('fs');
 const { BASE_URL } = require('../../config');
 const getFileSize = require('../../utils/fileSize');
 
-const get_folder = (res, folderName) => {
-    FileModel.find({ folderName })
+exports.get_all = (req, res) => {
+    FileModel.find({ folderName: 'Ana Dizin' })
         .then((files) => {
             res.status(200).json({
                 files,
@@ -17,10 +17,6 @@ const get_folder = (res, folderName) => {
                 mongoose: error.errmsg,
             });
         });
-};
-
-exports.get_all = (req, res) => {
-    get_folder(res, 'Ana Dizin');
 };
 
 exports.get_by_folder_name = (req, res) => {

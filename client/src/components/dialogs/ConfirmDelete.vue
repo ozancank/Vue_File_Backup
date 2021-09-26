@@ -37,7 +37,7 @@ export default {
 <style scoped>
 .btn-delete {
     background-color: red;
-    width: auto;
+    width: 100%;
     min-height: 5vh;
     padding: 0 1.5rem;
 }

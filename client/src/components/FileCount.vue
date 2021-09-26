@@ -16,8 +16,10 @@ export default {
                 v-for="count in fileCounts"
                 v-bind:key="count._id"
             >
-                {{ count._id }}
-                <b>{{ count.total }}</b>
+                <span>{{ count._id }}</span>
+                <span
+                    ><b>{{ count.total }}</b></span
+                >
             </div>
         </div>
     </div>
@@ -41,3 +43,4 @@ export default {
     font-size: 1.2rem;
 }
 </style>
+<style src="../../static/mobile.css"></style>
