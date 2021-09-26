@@ -3,9 +3,10 @@ import FileCounts from './FileCount';
 import ConfirmDelete from './dialogs/ConfirmDelete';
 import Folders from './Folders';
 import { folderMixin } from '../mixins/folderMixin';
+import { fileMixin } from '../mixins/fileMixin';
 
 export default {
-    mixins: [folderMixin],
+    mixins: [folderMixin, fileMixin],
     components: {
         FileCounts,
         ConfirmDelete,
@@ -14,17 +15,6 @@ export default {
     created() {
         this.$store.dispatch('Files/getFiles');
         this.$store.dispatch('Files/getFileCounts');
-    },
-
-    computed: {
-        files() {
-            return this.$store.getters['Files/files'];
-        },
-    },
-    methods: {
-        redirect(url) {
-            window.open('http://localhost:3000' + url, '_blank');
-        },
     },
 };
 </script>

@@ -1,6 +1,7 @@
 const FileModel = require('./FileModel');
 const fs = require('fs');
 const { BASE_URL } = require('../../config');
+const getFileSize = require('../../utils/fileSize');
 
 const get_folder = (res, folderName) => {
     FileModel.find({ folderName })
@@ -11,7 +12,7 @@ const get_folder = (res, folderName) => {
         })
         .catch((error) => {
             res.status(400).json({
-                message: 'Error',
+                message: 'error',
                 error,
                 mongoose: error.errmsg,
             });
@@ -22,9 +23,33 @@ exports.get_all = (req, res) => {
     get_folder(res, 'Ana Dizin');
 };
 
-exports.get = (req, res) => {
+exports.get_by_folder_name = (req, res) => {
     const folderName = req.params.folderName;
-    get_folder(res, folderName);
+    FileModel.find({ folderName })
+        .then((files) => {
+            getFileSize(folderName).then((size) => {
+                res.status(200).json({
+                    files,
+                    size: size === 'NaN undefined' ? 'File Not Found' : size,
+                });
+            });
+        })
+        .catch((error) => {
+            res.status(400).json({
+                message: 'error',
+                error,
+                mongoose: error.errmsg,
+            });
+        });
+};
+
+exports.get_file_size = (req, res) => {
+    const folderName = req.params.folderName;
+    getFileSize(folderName).then((size) => {
+        res.status(200).json({
+            size: size === 'NaN undefined' ? 'File Not Found' : size,
+        });
+    });
 };
 
 exports.upload = (req, res) => {

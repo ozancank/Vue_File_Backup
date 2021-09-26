@@ -23,7 +23,8 @@ const upload = multer({ storage });
 
 router.get('/', FileController.get_all);
 router.get('/file-count', FileController.file_count);
-router.get('/:folderName', FileController.get);
+router.get('/:folderName', FileController.get_by_folder_name);
+router.get('/file-size/:folderName', FileController.get_file_size);
 
 router.post('/upload', upload.single('file'), FileController.upload);
 router.delete('/delete', FileController.delete_file);
