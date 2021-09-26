@@ -29,7 +29,7 @@ export default {
             </div>
         </transition>
         <button class="btn-delete" @click="showModal = !showModal">
-            <i class="fa fa-trash" aria-hidden="true"></i>
+            <i class="fa fa-trash"></i>
         </button>
     </div>
 </template>
@@ -37,7 +37,12 @@ export default {
 <style scoped>
 .btn-delete {
     background-color: red;
-    min-width: 40px;
+    width: auto;
+    min-height: 5vh;
+    padding: 0 1.5rem;
+}
+.btn-delete i {
+    font-size: 20px;
 }
 .confirm-delete-modal {
     position: absolute;

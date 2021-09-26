@@ -3,18 +3,39 @@
     padding: 2rem;
     text-align: center;
     grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
 }
 
 .file {
     border: 1px solid var(--border-color);
-    min-height: 30vh;
+    min-height: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    width: 20rem;
 }
 
-.add-new{
-    text-align: center;
+.add-new {
     padding: 2rem;
+    text-align: center;
+}
+
+.main {
+    display: flex;
+}
+
+.not-added-yet {
+    padding: 1rem;
+    width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    .files {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    button {
+        width: 100%;
+    }
 }

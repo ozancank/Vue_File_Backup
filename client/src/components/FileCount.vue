@@ -3,14 +3,14 @@ export default {
     computed: {
         fileCounts() {
             return this.$store.getters['Files/fileCounts'];
-        }
-    }
+        },
+    },
 };
 </script>
 
 <template>
     <div>
-        <div class="cards">
+        <div class="cards" v-if="fileCounts.length > 0">
             <div
                 class="card"
                 v-for="count in fileCounts"

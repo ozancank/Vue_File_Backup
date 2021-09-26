@@ -18,8 +18,8 @@ const mutations = {
         state.fileCounts = payload;
     },
     removeFile(state, payload) {
-        const file = state.files.find(file => file._id == payload);
-        state.files.splice(file, 1);
+        const file = state.files.findIndex(file => file._id == payload);
+        Vue.delete(state.files, file);
     }
 };
 const actions = {

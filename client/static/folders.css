@@ -1,0 +1,52 @@
+.folders {
+    position: relative;
+    width: 20%;
+    height: 350px;
+    border: 1px solid var(--border-color);
+    padding: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.folders ul {
+    list-style-type: none;
+    line-height: 30px;
+    padding: 0.5rem;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.add-new-folder {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    left: 5px;
+}
+
+.error,
+.tooltip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    height: 40px;
+    width: 90%;
+    border-radius: 30rem;
+    font-size: 0.9rem;
+}
+
+.error {
+    background-color: #b71c1c;
+}
+
+.tooltip {
+    background-color: #00bcd4;
+}
+
+.folders .add-new-folder input {
+    width: 90%;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    border-bottom: 5px solid var(--border-color);
+}

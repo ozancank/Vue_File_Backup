@@ -28,6 +28,7 @@ button {
     min-height: 5vh;
     color: white;
     transition: 1s;
+    cursor: pointer;
 }
 
 button:hover {
